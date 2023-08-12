@@ -1,0 +1,33 @@
+server:
+  url: http://localhost:5000
+  port: "5000"
+  base_url: /v1
+  version: 1.0.0
+
+database.master:
+  name: master
+  driver: mysql
+  host: "localhost"
+  port: 5432
+  username: postgres
+  password: password
+  database: player
+  debug: true
+
+file:
+  images: /Users/rafsha/Documents/project/wamobiv2/qr/
+
+auth:
+  dash_api_key: admin
+  jwt_key: c0br4d1g1t4L
+  jwt_lifetime: 2880 # in minutes
+  jwt_audience: Cobra Middleware
+  jwt_issuer: Cobra Security Authority
+  client_secret: c0br4d1g1t4L
+
+admin:
+  user: admin
+  pass: admin
+
+redis:
+  host: localhost:6379
