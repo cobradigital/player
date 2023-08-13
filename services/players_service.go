@@ -82,6 +82,15 @@ func (s *playersService) Login(req request.Login) (res response.Login, err error
 		return res, util.NewError("500")
 	}
 
+	debit, err := s.deposit.GetOne("player_id = ? AND type = ?", player.ID, flags.DepositDebit)
+	if err != nil {
+		return res, util.NewError("400")
+	}
+	credit, err := s.deposit.GetOne("player_id = ? AND type = ?", player.ID, flags.DepositCredit)
+	if err != nil {
+		return res, util.NewError("400")
+	}
+
 	return response.Login{
 		Header: header,
 		Player: response.Player{
@@ -91,6 +100,11 @@ func (s *playersService) Login(req request.Login) (res response.Login, err error
 			Bank:         player.Bank,
 			NamaRekening: player.NamaRekening,
 			NoRekening:   player.NoRekening,
+			Debit:        debit,
+			Credit:       credit,
+			Deposit:      debit - credit,
+			CreatedAt:    player.CreatedAt,
+			UpdatedAt:    player.UpdatedAt,
 		},
 	}, nil
 }
@@ -128,6 +142,8 @@ func (s *playersService) Profile(id string) (res response.Player, err error) {
 		Debit:        debit,
 		Credit:       credit,
 		Deposit:      debit - credit,
+		CreatedAt:    player.CreatedAt,
+		UpdatedAt:    player.UpdatedAt,
 	}, nil
 }
 

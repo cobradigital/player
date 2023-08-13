@@ -45,7 +45,7 @@ func GetAll(r *http.Request) (*response.Success, error) {
 // Register ...
 func Register(r *http.Request) (*response.Success, error) {
 
-	var req request.Player
+	var req *request.Player
 	err := parseJSON(r, &req)
 	if err != nil {
 		return nil, util.NewError("400")
@@ -56,11 +56,10 @@ func Register(r *http.Request) (*response.Success, error) {
 		validation.Field(&req.Password, validation.Required),
 		validation.Field(&req.Email, validation.Required, is.Email),
 	); err != nil {
-		log.WithError(err).Error("invalid arguments")
 		return nil, util.NewError("400")
 	}
 
-	result, err := services.Players.Register(req)
+	result, err := services.Players.Register(*req)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +72,7 @@ func Register(r *http.Request) (*response.Success, error) {
 // Login ...
 func Login(r *http.Request) (*response.Success, error) {
 
-	var req request.Login
+	var req *request.Login
 	err := parseJSON(r, &req)
 	if err != nil {
 		return nil, util.NewError("400")
@@ -83,11 +82,10 @@ func Login(r *http.Request) (*response.Success, error) {
 		validation.Field(&req.Password, validation.Required),
 		validation.Field(&req.Email, validation.Required, is.Email),
 	); err != nil {
-		log.WithError(err).Error("invalid arguments")
 		return nil, util.NewError("400")
 	}
 
-	result, err := services.Players.Login(req)
+	result, err := services.Players.Login(*req)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +130,7 @@ func PutProfile(r *http.Request) (*response.Success, error) {
 
 	id := fmt.Sprintf("%v", context.Get(r, "id"))
 
-	var req request.Player
+	var req *request.Player
 	err := parseJSON(r, &req)
 	if err != nil {
 		return nil, util.NewError("400")
@@ -145,11 +143,10 @@ func PutProfile(r *http.Request) (*response.Success, error) {
 		validation.Field(&req.NamaRekening, validation.Required),
 		validation.Field(&req.NoRekening, validation.Required),
 	); err != nil {
-		log.WithError(err).Error("invalid arguments")
 		return nil, util.NewError("400")
 	}
 
-	result, err := services.Players.Update(id, req)
+	result, err := services.Players.Update(id, *req)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +159,7 @@ func PutProfile(r *http.Request) (*response.Success, error) {
 // PostPlayerDeposit ...
 func PostPlayerDeposit(r *http.Request) (*response.Success, error) {
 
-	var req request.PlayerDeposit
+	var req *request.PlayerDeposit
 	err := parseJSON(r, &req)
 	if err != nil {
 		return nil, util.NewError("400")
@@ -180,7 +177,7 @@ func PostPlayerDeposit(r *http.Request) (*response.Success, error) {
 		return nil, util.NewError("400")
 	}
 
-	result, err := services.Players.PlayerDeposit(req)
+	result, err := services.Players.PlayerDeposit(*req)
 	if err != nil {
 		return nil, err
 	}
