@@ -3,11 +3,14 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"repo/flags"
 	"repo/request"
 	"repo/response"
 	"repo/services"
 	"repo/util"
 
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/gorilla/context"
 )
 
@@ -21,6 +24,7 @@ func GetAll(r *http.Request) (*response.Success, error) {
 	filters := Filter(q, services.Players.Filter())
 
 	orderby := q.Get("order_by")
+
 	havingDeposit := q.Get("deposit")
 
 	result, err := services.Players.GetAll(filters, limit, skip, havingDeposit, orderby)
@@ -47,6 +51,15 @@ func Register(r *http.Request) (*response.Success, error) {
 		return nil, util.NewError("400")
 	}
 
+	if err := validation.ValidateStruct(req,
+		validation.Field(&req.Username, validation.Required),
+		validation.Field(&req.Password, validation.Required),
+		validation.Field(&req.Email, validation.Required, is.Email),
+	); err != nil {
+		log.WithError(err).Error("invalid arguments")
+		return nil, util.NewError("400")
+	}
+
 	result, err := services.Players.Register(req)
 	if err != nil {
 		return nil, err
@@ -63,6 +76,14 @@ func Login(r *http.Request) (*response.Success, error) {
 	var req request.Login
 	err := parseJSON(r, &req)
 	if err != nil {
+		return nil, util.NewError("400")
+	}
+
+	if err := validation.ValidateStruct(req,
+		validation.Field(&req.Password, validation.Required),
+		validation.Field(&req.Email, validation.Required, is.Email),
+	); err != nil {
+		log.WithError(err).Error("invalid arguments")
 		return nil, util.NewError("400")
 	}
 
@@ -117,6 +138,17 @@ func PutProfile(r *http.Request) (*response.Success, error) {
 		return nil, util.NewError("400")
 	}
 
+	if err := validation.ValidateStruct(req,
+		validation.Field(&req.Username, validation.Required),
+		validation.Field(&req.Email, validation.Required, is.Email),
+		validation.Field(&req.Bank, validation.Required),
+		validation.Field(&req.NamaRekening, validation.Required),
+		validation.Field(&req.NoRekening, validation.Required),
+	); err != nil {
+		log.WithError(err).Error("invalid arguments")
+		return nil, util.NewError("400")
+	}
+
 	result, err := services.Players.Update(id, req)
 	if err != nil {
 		return nil, err
@@ -133,6 +165,18 @@ func PostPlayerDeposit(r *http.Request) (*response.Success, error) {
 	var req request.PlayerDeposit
 	err := parseJSON(r, &req)
 	if err != nil {
+		return nil, util.NewError("400")
+	}
+
+	if err := validation.ValidateStruct(req,
+		validation.Field(&req.PlayerID, validation.Required),
+		validation.Field(&req.Type, validation.Required),
+		validation.Field(&req.Nominal, validation.Required, validation.In(
+			flags.DepositDebit,
+			flags.DepositCredit,
+		)),
+	); err != nil {
+		log.WithError(err).Error("invalid arguments")
 		return nil, util.NewError("400")
 	}
 

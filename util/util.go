@@ -181,21 +181,3 @@ func RemoveHtmlTag(in string) string {
 	}
 	return in
 }
-
-func ClearNumber(number string) string {
-	if string(number[0]) == "+" {
-		return string(number[1:len(number)])
-	} else if string(number[0]) == "0" {
-		return "62" + string(number[1:len(number)])
-	}
-
-	return number
-}
-
-func TypeTarget(number string) string {
-	numberTarget := ClearNumber(number)
-	if len([]rune(numberTarget)) > 15 {
-		return "g.us"
-	}
-	return "s.whatsapp.net"
-}
