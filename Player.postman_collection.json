@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "3ce870e8-0616-46fd-9201-d285ba306d89",
+		"name": "Player",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15871495",
+		"_collection_link": "https://universal-comet-716759.postman.co/workspace/Team-Workspace~5393ef58-4437-462d-8260-5882d37bc06f/collection/15871495-3ce870e8-0616-46fd-9201-d285ba306d89?action=share&creator=15871495&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Register - unauthorize",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin2\",\n    \"password\": \"admin2\",\n    \"email\": \"admin2@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/v1/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login player - unauthorize",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin1@gmail.com\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/v1/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout player",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdXJwb3NlIjoiMSIsImF1ZCI6IkNvYnJhIE1pZGRsZXdhcmUiLCJleHAiOjE2OTI2MTI2NjgsImlhdCI6MTY5MTgzNTA2OCwiaXNzIjoiQ29icmEgU2VjdXJpdHkgQXV0aG9yaXR5Iiwic3ViIjoiNjU2OTVhY2MtMzhlNi0xMWVlLWI1NjUtMGE1YzI5NTkwODRjIn0.PztGn12nM0z7s3P2YUK2-EFwy6UJnpsA77vPVl92kS0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/v1/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get profile player",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdXJwb3NlIjoiMSIsImF1ZCI6IkNvYnJhIE1pZGRsZXdhcmUiLCJleHAiOjE2OTI2NDMwMjQsImlhdCI6MTY5MTg2NTQyNCwiaXNzIjoiQ29icmEgU2VjdXJpdHkgQXV0aG9yaXR5Iiwic3ViIjoiNjU2OTVhY2MtMzhlNi0xMWVlLWI1NjUtMGE1YzI5NTkwODRjIn0.bfrj5__7j1SlGxu2bdieFL9QkBnZd_ePW-0z2CZxE3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/v1/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile player",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdXJwb3NlIjoiMSIsImF1ZCI6IkNvYnJhIE1pZGRsZXdhcmUiLCJleHAiOjE2OTI2MTAxMTQsImlhdCI6MTY5MTgzMjUxNCwiaXNzIjoiQ29icmEgU2VjdXJpdHkgQXV0aG9yaXR5Iiwic3ViIjoiNjU2OTVhY2MtMzhlNi0xMWVlLWI1NjUtMGE1YzI5NTkwODRjIn0.4wa9NHSHYGKe_t23xnX_5T5fCs7KZRnIliytFMvgNdc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"aji\",\n    \"password\": \"admin\",\n    \"email\": \"admin1@gmail.com\",\n    \"bank\": \"Mandiri\",\n    \"no_rekening\": \"1203432234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/v1/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "get list player",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/v1/player/list?no_rekening&start_created_at=2023-08-11&end_created_at=2023-08-15&order_by=created_at desc&deposit=10000",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"player",
+								"list"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "aj",
+									"disabled": true
+								},
+								{
+									"key": "bank",
+									"value": "Mandiri",
+									"disabled": true
+								},
+								{
+									"key": "nama_rekening",
+									"value": "muh",
+									"disabled": true
+								},
+								{
+									"key": "no_rekening",
+									"value": null
+								},
+								{
+									"key": "start_created_at",
+									"value": "2023-08-11"
+								},
+								{
+									"key": "end_created_at",
+									"value": "2023-08-15"
+								},
+								{
+									"key": "order_by",
+									"value": "created_at desc"
+								},
+								{
+									"key": "deposit",
+									"value": "10000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "management deposit player",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"player_id\": \"5e8257d2-3935-11ee-a9ca-0a5c2959084c\",\n    \"type\": \"debit\",\n    \"nominal\": 1000000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/v1/player/deposit",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"player",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
